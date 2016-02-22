@@ -17,6 +17,11 @@ public class AllCitiesAdapter extends RecyclerView.Adapter<AllCitiesAdapter.View
     private final Activity mActivity;
     private final LayoutInflater mLayoutInflater;
     private List<Location> mLocations;
+    private OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener {
+        void onClick(View view, int position);
+    }
 
     public AllCitiesAdapter(Activity activity, List<Location> locations) {
         mActivity = activity;
@@ -31,12 +36,26 @@ public class AllCitiesAdapter extends RecyclerView.Adapter<AllCitiesAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Location city = mLocations.get(position);
         holder.icon.setImageResource(city.getImage());
         holder.title.setText(city.getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemClickListener.onClick(v, position);
+            }
+        });
+
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public Location getItem(int position) {
+        return mLocations.get(position);
+    }
     @Override
     public int getItemCount() {
         return mLocations.size();

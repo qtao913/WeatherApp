@@ -7,5 +7,8 @@
     <style name="TextAppearance.CityItem" parent="TextAppearance.AppCompat.Small">
         <item name="android:textSize">@dimen/category_item_text_size</item>
     </style>
+    <style name="TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/topeka_primary</item>
+    </style>
 
 </resources>
