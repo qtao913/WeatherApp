@@ -18,6 +18,7 @@ import com.sunnietech.weatherapp.activity.DetailedCityWeather;
 import com.sunnietech.weatherapp.adapter.AllCitiesAdapter;
 import com.sunnietech.weatherapp.helper.TransitionHelper;
 import com.sunnietech.weatherapp.model.Location;
+import com.sunnietech.weatherapp.widget.OffsetDecoration;
 
 import java.util.Arrays;
 
@@ -52,7 +53,9 @@ public class WeatherForAllCitiesFragment extends Fragment {
     }
 
     private void setUpCityGrid(RecyclerView citiesView) {
-        citiesView.setHasFixedSize(true);
+        final int spacing = getContext().getResources()
+                .getDimensionPixelSize(R.dimen.spacing_nano);
+        citiesView.addItemDecoration(new OffsetDecoration(spacing));
         mAdapter = new AllCitiesAdapter(getActivity(), Arrays.asList(setDummyDataForDisplay()));
         mAdapter.setOnItemClickListener(
                 new AllCitiesAdapter.OnItemClickListener() {
@@ -68,6 +71,12 @@ public class WeatherForAllCitiesFragment extends Fragment {
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
         citiesView.setLayoutManager(mLayoutManager);
         citiesView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        getActivity().supportStartPostponedEnterTransition();
+        super.onResume();
     }
 
     private Location[] setDummyDataForDisplay() {
@@ -91,12 +100,11 @@ public class WeatherForAllCitiesFragment extends Fragment {
 
         // Start the activity with the participants, animating from one to the other.
         final Bundle transitionBundle = sceneTransitionAnimation.toBundle();
-        Intent startIntent = new Intent (getActivity(), DetailedCityWeather.class);
+        Intent startIntent = new Intent (activity, DetailedCityWeather.class);
         startIntent.putExtra(getString(R.string.cityNameTag), location.getName());
         startIntent.putExtra(getString(R.string.cityImageTag), location.getImage());
-        ActivityCompat.startActivityForResult(activity,
+        ActivityCompat.startActivity(activity,
                 startIntent,
-                REQUEST_CATEGORY,
                 transitionBundle);
     }
 }

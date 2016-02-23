@@ -2,6 +2,7 @@ package com.sunnietech.weatherapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -16,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunnietech.weatherapp.R;
+import com.sunnietech.weatherapp.widget.TextSharedElementCallback;
+
+import java.util.List;
 
 public class DetailedCityWeather extends ActionBarActivity {
-
+    public Interpolator mInterpolator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,30 @@ public class DetailedCityWeather extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        int categoryNameTextSize = getResources()
+                .getDimensionPixelSize(R.dimen.category_item_text_size);
+        int paddingStart = getResources().getDimensionPixelSize(R.dimen.spacing_double);
+        ActivityCompat.setEnterSharedElementCallback(this,
+                new TextSharedElementCallback(categoryNameTextSize, paddingStart) {
+                    @Override
+                    public void onSharedElementStart(List<String> sharedElementNames,
+                                                     List<View> sharedElements,
+                                                     List<View> sharedElementSnapshots) {
+                        super.onSharedElementStart(sharedElementNames,
+                                sharedElements,
+                                sharedElementSnapshots);
+                    }
+
+                    @Override
+                    public void onSharedElementEnd(List<String> sharedElementNames,
+                                                   List<View> sharedElements,
+                                                   List<View> sharedElementSnapshots) {
+                        super.onSharedElementEnd(sharedElementNames,
+                                sharedElements,
+                                sharedElementSnapshots);
+                        // Make sure to perform this animation after the transition has ended.
+                    }
+                });
     }
 
 

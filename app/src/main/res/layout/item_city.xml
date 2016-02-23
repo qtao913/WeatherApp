@@ -23,6 +23,7 @@
         android:layout_gravity="bottom"
         android:textAppearance="@style/TextAppearance.CityItem"
         android:padding="@dimen/spacing_double"
-        android:textColor="@color/background_material_dark"/>
+        android:background="#ffe6e6"
+        android:textColor="@color/topeka_primary"/>
 
 </FrameLayout>
