@@ -26,7 +26,7 @@ public class DetailedCityWeather extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_city_weather);
+        setContentView(R.layout.activity_detailed_info);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -92,7 +92,7 @@ public class DetailedCityWeather extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_detailed_city_weather, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_detail_info, container, false);
             mInterpolator = new FastOutSlowInInterpolator();
             Intent intent = getActivity().getIntent();
             String cityName = intent.getStringExtra(getString(R.string.cityNameTag));

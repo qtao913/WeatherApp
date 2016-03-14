@@ -14,7 +14,7 @@ public class WeatherForAllCities extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather_for_all_cities);
+        setContentView(R.layout.activity_general_info);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new WeatherForAllCitiesFragment())
